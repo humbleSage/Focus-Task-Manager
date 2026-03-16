@@ -12,6 +12,9 @@ struct focus_slip {
 
 void show_slip(struct focus_slip slip);
 void edit_top_task(struct focus_slip *slip);
+void edit_quick_win_1(struct focus_slip *slip);
+void edit_quick_win_2(struct focus_slip *slip);
+void edit_later(struct focus_slip *slip);
 
 
 int main(void) {
@@ -23,6 +26,9 @@ int main(void) {
 
     show_slip(focus_slip1);
     edit_top_task(&focus_slip1);
+    edit_quick_win_1(&focus_slip1);
+    edit_quick_win_2(&focus_slip1);
+    edit_later(&focus_slip1);
     show_slip(focus_slip1);
 
     return 0;
@@ -39,5 +45,26 @@ void edit_top_task(struct focus_slip *slip) {
     printf ("Enter top task: ");
     if (fgets(slip->top_task, MAX_LENGTH, stdin) != NULL) {
         slip->top_task[strcspn(slip->top_task, "\n")] = '\0';
+    }
+}
+
+void edit_quick_win_1(struct focus_slip *slip) {
+    printf ("Enter your first quick win: ");
+    if (fgets(slip->quick_win_1, MAX_LENGTH, stdin) != NULL) {
+        slip->quick_win_1[strcspn(slip->quick_win_1, "\n")] = '\0';
+    }
+}
+
+void edit_quick_win_2(struct focus_slip *slip) {
+    printf ("Enter your second quick win: ");
+    if (fgets(slip->quick_win_2, MAX_LENGTH, stdin) != NULL) {
+        slip->quick_win_2[strcspn(slip->quick_win_2, "\n")] = '\0';
+    }
+}
+
+void edit_later(struct focus_slip *slip) {
+    printf ("Enter your later task: ");
+    if (fgets(slip->later, MAX_LENGTH, stdin) != NULL) {
+        slip->later[strcspn(slip->later, "\n")] = '\0';
     }
 }
