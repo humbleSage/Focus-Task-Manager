@@ -21,9 +21,9 @@ void load_slip(struct focus_slip *slip);
 
 
 int main(void) {
-    printf("****************** TINY TASK MACHINE ******************\n");
-    printf("(THE APPARENT CURE FOR ALL OF YOU PROCRASTINATION WOES)\n");
-    printf("*******************************************************\n");
+    printf("****************** TINY TASK MACHINE *******************\n");
+    printf("(THE APPARENT CURE FOR ALL OF YOUR PROCRASTINATION WOES)\n");
+    printf("********************************************************\n");
     printf("\n\n");
     struct focus_slip focus_slip1;
     strcpy(focus_slip1.top_task_1, "EMPTY");
