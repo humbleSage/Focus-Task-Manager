@@ -11,10 +11,7 @@ struct focus_slip {
 };
 
 void show_slip(struct focus_slip slip);
-void edit_top_task(struct focus_slip *slip);
-void edit_quick_win_1(struct focus_slip *slip);
-void edit_quick_win_2(struct focus_slip *slip);
-void edit_later(struct focus_slip *slip);
+void edit_field(char field[], const char *prompt);
 
 
 int main(void) {
@@ -24,12 +21,45 @@ int main(void) {
     strcpy(focus_slip1.quick_win_2, "Undefined");
     strcpy(focus_slip1.later, "Undefined");
 
-    show_slip(focus_slip1);
-    edit_top_task(&focus_slip1);
-    edit_quick_win_1(&focus_slip1);
-    edit_quick_win_2(&focus_slip1);
-    edit_later(&focus_slip1);
-    show_slip(focus_slip1);
+    int choice = 0;
+
+    while(choice != 6) {
+        printf("\n1. Show slip\n");
+        printf("2. Edit top task.\n");
+        printf("3. Edit quick win 1.\n");
+        printf("4. Edit quick win 2.\n");
+        printf("5. Edit later.\n");
+        printf("6. Exit.\n");
+
+        printf("Choose: ");
+
+        scanf("%d", &choice);
+        getchar();
+
+        switch(choice) {
+            case 1:
+                show_slip(focus_slip1);
+                break;
+            case 2:
+                edit_field(focus_slip1.top_task, "Enter your top task: ");
+                break;
+            case 3:
+                edit_field(focus_slip1.quick_win_1, "Enter your quick win 1: ");
+                break;
+            case 4:
+                edit_field(focus_slip1.quick_win_2, "Enter your quick win 2: ");
+                break;
+            case 5:
+                edit_field(focus_slip1.later, "Enter your later task: ");
+                break;
+            case 6:
+                printf("Goodbye!\n");
+                break;
+            default:
+                printf("Invalid choice!\n");
+                break;
+        }
+    }
 
     return 0;
 }
@@ -41,30 +71,9 @@ void show_slip(struct focus_slip slip) {
     printf("Later: %s\n", slip.later);
 }
 
-void edit_top_task(struct focus_slip *slip) {
-    printf ("Enter top task: ");
-    if (fgets(slip->top_task, MAX_LENGTH, stdin) != NULL) {
-        slip->top_task[strcspn(slip->top_task, "\n")] = '\0';
-    }
-}
-
-void edit_quick_win_1(struct focus_slip *slip) {
-    printf ("Enter your first quick win: ");
-    if (fgets(slip->quick_win_1, MAX_LENGTH, stdin) != NULL) {
-        slip->quick_win_1[strcspn(slip->quick_win_1, "\n")] = '\0';
-    }
-}
-
-void edit_quick_win_2(struct focus_slip *slip) {
-    printf ("Enter your second quick win: ");
-    if (fgets(slip->quick_win_2, MAX_LENGTH, stdin) != NULL) {
-        slip->quick_win_2[strcspn(slip->quick_win_2, "\n")] = '\0';
-    }
-}
-
-void edit_later(struct focus_slip *slip) {
-    printf ("Enter your later task: ");
-    if (fgets(slip->later, MAX_LENGTH, stdin) != NULL) {
-        slip->later[strcspn(slip->later, "\n")] = '\0';
+void edit_field(char field[], const char *prompt) {
+    printf ("%s", prompt);
+    if (fgets(field, MAX_LENGTH, stdin) != NULL) {
+        field[strcspn(field, "\n")] = '\0';
     }
 }
